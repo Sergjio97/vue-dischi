@@ -1,19 +1,23 @@
 <template>
   <div class="album text-center">
-      <img class="py-4 px-2" src="https://www.onstageweb.com/wp-content/uploads/2018/09/bon-jovi-new-jersey.jpg" alt="">
-      <h3 class="mb-3">New Jersey</h3>
-      <p>Bon Jovi</p>
-      <p class="pb-4">1988</p>
+      <img class="py-4 px-2" :src="info.poster" alt="info.title">
+      <h3 class="mb-3">{{info.title}}</h3>
+      <p>{{info.author}}</p>
+      <p class="pb-4">{{info.year}}</p>
   </div>
 </template>
 
 <script>
 export default {
-    name: 'AlbumCard'
+    name: 'AlbumCard',
+    props: {
+        info: Object
+    }
 }
 </script>
 
 <style lang='scss' scoped>
+
 img {
     width: 100%;
 }
@@ -25,12 +29,12 @@ img {
         text-transform: uppercase;
         font-weight: bold;
         color: #fff;
+        font-size: 16px;
     }
 
     p {
         color: #808080;
-        font-size: 20px;
+        font-size: 16px;
     }
 }
-
 </style>
