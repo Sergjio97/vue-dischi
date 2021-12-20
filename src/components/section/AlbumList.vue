@@ -1,30 +1,34 @@
 <template>
+    <div class="container-fluid py-5 px-5">
+        <div class="container">
+            <div class="col">
+                <SearchBar @change="searchGenre()"/>
+            </div>
+        </div>
 
-<div class="container-fluid py-5 px-5">
-
-    <div class="container">
-        <div class="row d-flex flex-wrap justify-content-center">
-            <div class="col-12 m-4 col-md-2 m-md-2 col-xl-2 m-xl-3 d-flex flex-wrap justify-content-center" v-for="(album, index) in albums" :key="index">
-                <AlbumCard :info="album"/>
+        <div class="container">
+            <div class="row d-flex flex-wrap justify-content-center">
+                <div class="col-12 m-4 col-md-2 m-md-2 col-xl-2 m-xl-3 d-flex flex-wrap justify-content-center" v-for="(album, index) in albums" :key="index">
+                    <AlbumCard :info="album"/>
+                </div>
             </div>
         </div>
     </div>
-
-</div>
-
 </template>
 
 <script>
 import axios from 'axios';
 import AlbumCard from '../common/AlbumCard.vue';
+import SearchBar from '../common/SearchBar.vue'
 export default {
     name: 'AlbumList',
     components: {
-        AlbumCard
+        AlbumCard,
+        SearchBar
     },
     data() {
         return {
-            albums: null
+            albums: null,
         }
     },
     created() {
@@ -39,6 +43,20 @@ export default {
             console.log(error);
         })
     },
+    methods: {
+        searchGenre(payload) {
+            this.selectVal = payload;
+        }
+    },
+    computed: {
+        genreFiltered() {
+            const arrayFiltered = this.albums.filter( (elm) => {
+                return elm.genre.includes.toLowerCase()(this.selectVal.toLowerCase());
+            } );
+
+            return arrayFiltered;
+        }
+    }
 }
 </script>
 
