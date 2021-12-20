@@ -28,7 +28,8 @@ export default {
     },
     data() {
         return {
-            albums: null,
+            albums: '',
+            albumFiltered: ''
         }
     },
     created() {
@@ -45,18 +46,11 @@ export default {
     },
     methods: {
         searchGenre(payload) {
-            this.selectVal = payload;
+            this.albumFiltered = this.albums.filter( (albums) => {
+                return albums.includes(payload)
+            })
         }
     },
-    computed: {
-        genreFiltered() {
-            const arrayFiltered = this.albums.filter( (elm) => {
-                return elm.genre.includes.toLowerCase()(this.selectVal.toLowerCase());
-            } );
-
-            return arrayFiltered;
-        }
-    }
 }
 </script>
 
